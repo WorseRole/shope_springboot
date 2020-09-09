@@ -1,11 +1,12 @@
 package com.worserole.shope_springboot.service.impl;
 
-import com.worserole.shope_springboot.dao.CategoryMapper;
+import com.worserole.shope_springboot.mapper.CategoryMapper;
 import com.worserole.shope_springboot.pojo.Category;
 import com.worserole.shope_springboot.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getCategoryList() {
-        return null;
+        List<Category> categoryList = categoryMapper.getCategoryList();
+        return categoryList;
     }
 }
