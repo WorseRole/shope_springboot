@@ -1,0 +1,115 @@
+-- salt 是盐，用来和 shiro 结合的时候，加密用的
+-- 用户表
+CREATE TABLE USER (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  NAME VARCHAR(255) DEFAULT NULL,
+  PASSWORD VARCHAR(255) DEFAULT NULL,
+  salt VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 分类表
+CREATE TABLE category (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  NAME VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 属性表
+-- category_id  :  分类表id
+CREATE TABLE property (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  category_id INT(11) DEFAULT NULL,
+  NAME VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 产品表
+-- subTitle : 小标题
+-- originalPrice : 原始价格
+-- promotePrice : 优惠价格
+-- stock : 库存
+-- createDate : 创建时间
+CREATE TABLE product (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  NAME VARCHAR(255) DEFAULT NULL,
+  subTitle VARCHAR(255) DEFAULT NULL,
+  originalPrice FLOAT DEFAULT NULL,
+  promotePrice FLOAT DEFAULT NULL,
+  stock INT(11) DEFAULT NULL,
+  category_id INT(11) DEFAULT NULL,
+  createDate DATETIME DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 属性值表
+CREATE TABLE propertyvalue (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  product_id INT(11) DEFAULT NULL,
+  property_id INT(11) DEFAULT NULL,
+  VALUE VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 产品图片表
+CREATE TABLE productimage (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  product_id INT(11) DEFAULT NULL,
+  TYPE VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 评价表
+-- user_id : 用户id
+-- product_id : 产品id
+-- content : 评论内容
+CREATE TABLE review (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  content VARCHAR(4000) DEFAULT NULL,
+  user_id INT(11) DEFAULT NULL,
+  product_id INT(11) DEFAULT NULL,
+  createDate DATETIME DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 订单表
+-- orderCode : 订单号
+-- address : 收获地址
+-- post : 邮编
+-- receiver : 收货人信息
+-- mobile : 收货人手机
+-- userMessage : 用户备注信息
+-- createDate : 订单创建日期
+-- payDate : 支付日期
+-- deliveryDate : 发货日期
+-- confirmDate : 确认收获日期
+-- status : 订单状态
+-- user_id : 用户id
+CREATE TABLE ordertable (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  orderCode VARCHAR(255) DEFAULT NULL,
+  address VARCHAR(255) DEFAULT NULL,
+  post VARCHAR(255) DEFAULT NULL,
+  receiver VARCHAR(255) DEFAULT NULL,
+  mobile VARCHAR(255) DEFAULT NULL,
+  userMessage VARCHAR(255) DEFAULT NULL,
+  createDate DATETIME DEFAULT NULL,
+  payDate DATETIME DEFAULT NULL,
+  deliveryDate DATETIME DEFAULT NULL,
+  confirmDate DATETIME DEFAULT NULL,
+  user_id INT(11) DEFAULT NULL,
+  STATUS VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+-- 订单项
+-- 购买数量
+CREATE TABLE orderitem (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  product_id INT(11) DEFAULT NULL,
+  order_id INT(11) DEFAULT NULL,
+  user_id INT(11) DEFAULT NULL,
+  NUMBER INT(11) DEFAULT NULL,
+  PRIMARY KEY(id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
